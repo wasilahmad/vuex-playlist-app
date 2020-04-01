@@ -1,6 +1,9 @@
 <template>
   <div class="page-title">
-    <h1><strong>{{ text }}</strong> <span class="ml-auto">{{totalFavourite}}</span></h1>    
+    <h1>
+      <strong>{{ text }}</strong>      
+      <span class="badge badge-secondary ml-auto" v-if="totalFavourite">{{totalFavourite}}</span>
+    </h1>    
   </div>
 </template>
 
