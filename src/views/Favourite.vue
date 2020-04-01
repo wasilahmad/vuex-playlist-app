@@ -1,10 +1,10 @@
 <template>
   <div class="favourite-songs">
-    <Title text="Favourite List" :total-favourite="totalFavouriteSongs" />
+    <Title text="Favourite List" :total-favourite="total" />
     
     <div class="list-container mb-4">
       <ul class="list-group">
-        <li class="list-group-item" v-for="song in favouriteSongsList" :key="song.id">
+        <li class="list-group-item" v-for="song in favouriteSongs" :key="song.id">
           {{ song.title }}
           <span 
               class="icon-favourite ml-auto"
@@ -22,17 +22,21 @@
 // @ is an alias to /src
 import Title from '@/components/Title.vue';
 
+// use to combine multiple getters
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'Favourite',
   components: {
     Title
   },
   computed: {
-    favouriteSongsList() {
-      return this.$store.getters.favouriteSongsList
-    },
-    totalFavouriteSongs() {
-      return this.$store.getters.totalFavouriteSongs
+    ...mapGetters({
+      'favouriteSongs': 'favouriteSongsList',
+      'total' : 'totalFavouriteSongs'
+    }),
+    otherComputedProps() {
+      return console.log('other computed props with mapGetters()');
     }
   }
 }
