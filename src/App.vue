@@ -29,8 +29,26 @@
       </div>
     </nav>
     <router-view/>
+    <Loader :is-visible="toggleLoader"/>
   </div>
 </template>
+
+<script>
+// @ is an alias to /src
+import Loader from '@/components/Loader.vue';
+
+export default {
+  name: 'App',
+  components: {
+    Loader
+  },
+  computed : {
+    toggleLoader() {
+      return this.$store.getters.loaderFlag
+    }
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 

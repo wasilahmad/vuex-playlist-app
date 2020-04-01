@@ -9,7 +9,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     songs: Songs,
-    favouriteSongs:[]
+    favouriteSongs:[],
+    loader: false
   },
   getters: {
     unfavouriteSongsList( state ) {
@@ -20,6 +21,9 @@ export default new Vuex.Store({
     },
     totalFavouriteSongs( state ) {
       return state.favouriteSongs.length
+    },
+    loaderFlag( state ) {
+      return state.loader;
     }
   },
   mutations: {
@@ -40,9 +44,24 @@ export default new Vuex.Store({
       const favSongIndex = favTempSongs.findIndex( item => item.id == payload.id);
       state.favouriteSongs.splice(favSongIndex, 1);
       //console.log(index, payload);
-    }
+    },
+    toggleLoader( state, isVisible) {
+      return state.loader = isVisible;
+    }   
   },
   actions: {
+    // make mutations and actions name same for better understanding the flow
+    // use to run async mutations() 
+    makeFevourite(context, payload) {
+      // context is similar to store obj but used for async operatios
+      context.commit('makeFevourite', payload);
+      // commit takes two orguments 
+      // 1. mutation name
+      // 2. payload obj    
+    },
+    makeUnFavourite( context, payload ) {
+      context.commit('makeUnFavourite', payload);
+    }
   },
   modules: {
   }

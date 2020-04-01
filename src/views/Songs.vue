@@ -5,10 +5,9 @@
     <div class="list-container mb-4">
       <ul class="list-group">
         <li class="list-group-item" v-for="song in songsList" :key="song.id">
-          {{ song.title }}
+          {{ song.id }} - {{ song.title }}
           <span 
-              class="icon-favourite ml-auto"
-              v-bind:class="{ 'is-favourite' : song.favourite}"               
+              class="icon-favourite ml-auto"               
               title="Add To Favourite" 
               @click="addToFavourite(song)">
             <font-awesome-icon :icon="['fas', 'star']"/>
@@ -34,11 +33,24 @@ export default {
   },
   methods:{
     addToFavourite(payload){
-      // const song = this.$store.state.songs.find( item => item.id === payload.id);
-      // song.favourite = true;
-      // this.$store.state.favouriteSongs.push(song);
 
-      this.$store.commit('makeFevourite', payload);
+      // toggleLoader mutation call
+      this.$store.commit('toggleLoader', true);
+
+      setTimeout(() => {
+        // async actions using dispatch() method
+        this.$store.dispatch('makeFevourite', payload);
+        
+        // to hide loader 
+        this.$store.commit('toggleLoader', false);
+      }, 2000)
+
+      // actions() are used to make async call
+      // e.g. this.$store.dispatch('makeFevourite', payload);
+      // action can be called using dispatch() method
+      // it takes two orguments
+      // 1. action name
+      // 2. payload object
 
     }
   },

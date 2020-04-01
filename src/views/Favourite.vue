@@ -5,7 +5,7 @@
     <div class="list-container mb-4">
       <ul class="list-group">
         <li class="list-group-item" v-for="song in favouriteSongs" :key="song.id">
-          {{ song.title }}
+          {{ song.id }} - {{ song.title }}
           <span 
               @click="removeFromFavourite(song)"
               class="icon-favourite ml-auto"
@@ -34,11 +34,25 @@ export default {
   methods: {
     removeFromFavourite(payload) {
       console.log(payload);
-      // this.$store.commit({
+      // mutations() can be called using commit() method
+      // e.g. this.$store.commit('makeUnFavourite', payload); 
+      // it takes two arguments
+      // 1. mutation name
+      // 2. payload object
+      // or
+      // e.g this.$store.commit({
       //   type: 'makeUnFavourite',
       //   payload : payload.id
       // })
-      this.$store.commit('makeUnFavourite', payload); 
+
+      // show loader before the async action begins
+      this.$store.commit('toggleLoader', true);
+
+      // async action to remove from favourite list
+      setTimeout(()=> {
+        this.$store.dispatch('makeUnFavourite', payload);
+        this.$store.commit('toggleLoader', false);
+      }, 2000);
     }
   },
   computed: {
