@@ -7,6 +7,7 @@
         <li class="list-group-item" v-for="song in favouriteSongs" :key="song.id">
           {{ song.title }}
           <span 
+              @click="removeFromFavourite(song)"
               class="icon-favourite ml-auto"
               v-bind:class="{ 'is-favourite' : song.favourite}"               
               title="Add To Favourite">
@@ -29,6 +30,16 @@ export default {
   name: 'Favourite',
   components: {
     Title
+  },
+  methods: {
+    removeFromFavourite(payload) {
+      console.log(payload);
+      // this.$store.commit({
+      //   type: 'makeUnFavourite',
+      //   payload : payload.id
+      // })
+      this.$store.commit('makeUnFavourite', payload); 
+    }
   },
   computed: {
     ...mapGetters({

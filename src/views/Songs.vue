@@ -34,9 +34,12 @@ export default {
   },
   methods:{
     addToFavourite(payload){
-      const song = this.$store.state.songs.find( item => item.id === payload.id);
-      song.favourite = true;
-      this.$store.state.favouriteSongs.push(song);
+      // const song = this.$store.state.songs.find( item => item.id === payload.id);
+      // song.favourite = true;
+      // this.$store.state.favouriteSongs.push(song);
+
+      this.$store.commit('makeFevourite', payload);
+
     }
   },
   computed: {
