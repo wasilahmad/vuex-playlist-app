@@ -1,32 +1,64 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+  <div id="app" class="container">    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">      
+      <router-link to="/" class="navbar-brand">Music Streaming</router-link>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <router-link to="/" class="nav-link">
+              <font-awesome-icon :icon="['fas', 'list']"/>
+              Songs
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/favourite" class="nav-link">
+              <font-awesome-icon :icon="['fas', 'star']"/>
+              Favourite
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/add" class="nav-link">
+              <font-awesome-icon :icon="['fas', 'plus']"/>
+              Add New
+            </router-link>
+          </li>
+        </ul>
+      </div>
+    </nav>
     <router-view/>
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
+
+body {
+  font-size: 14px;
+  font-weight: 400;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
 }
 
-#nav {
-  padding: 30px;
+.navbar-dark .navbar-nav .nav-link {
+  
+  &.router-link-exact-active,
+  &.router-link-exact-active:focus {
+    color: rgba(255,255,255, 1);
+  }
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+}
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+@media screen and (min-width: 992px) {
+  .container {
+    max-width: 540px;
+    width: 540px;
   }
 }
+
 </style>
